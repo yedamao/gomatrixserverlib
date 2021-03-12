@@ -149,6 +149,7 @@ func (f *federationTripper) getTransport(tlsServerName string) (transport http.R
 	// Create the transport if we don't have any for this TLS server name.
 	if transport, ok = f.transports[tlsServerName]; !ok {
 		tr := &http.Transport{
+			Proxy:             http.ProxyFromEnvironment,
 			DisableKeepAlives: true,
 			TLSClientConfig: &tls.Config{
 				ServerName:         tlsServerName,
